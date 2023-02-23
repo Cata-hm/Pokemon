@@ -1,0 +1,8 @@
+.displayCards {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    gap: 5em;
+    text-decoration: none;
+    flex-wrap: wrap;
+}
