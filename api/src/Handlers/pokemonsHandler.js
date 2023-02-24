@@ -7,7 +7,7 @@ const getAllPokemonsAndByName = async (req, res, next) => {
     try {
         const name = req.query.name;
         const pokemonsTotal = await getAllPokemons();
-        return res.send(pokemonsTotal)
+        return res.json(pokemonsTotal)
         if(name){
             const pokemonName = await pokemonsTotal.filter( element => element.name.toLowerCase().includes(name.toLowerCase()))
             pokemonName.length ? res.status(200).send( pokemonName ) : res.status(200).send( "Pokemon name does not exist" );
