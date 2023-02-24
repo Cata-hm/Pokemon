@@ -1,9 +1,9 @@
-const { Router } = require('express');
-const getTypes = require('../Handlers/typesHandler');
+const { Router } = require("express");
+const getTypes = require("../Handlers/typesHandler");
 
 // Import all routers
 
-const typesRouter = Router ();
+const typesRouter = Router();
 
 // Configure the routers
 

@@ -1,6 +1,8 @@
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
+//__________________BRING DATA FROM API______________________________
+
 const getAllPokemons = async () => {
   const pokemonApi = await axios.get(
     "https://pokeapi.co/api/v2/pokemon?offset=0&limit=150"
@@ -35,6 +37,8 @@ const getAllPokemons = async () => {
     return object;
   });
 
+  //__________________BRING DATA FROM DB______________________________
+
   const pokeDB = await Pokemon.findAll({ include: Type });
 
   const dataFromDB = pokeDB?.map((element) => {
@@ -42,7 +46,7 @@ const getAllPokemons = async () => {
       id: element.dataValues.id,
       name:
         element.dataValues.name.trim().toLowerCase().charAt(0).toUpperCase() +
-        element.dataValues.name.substring(1), //me traigo el name con el fin de que quede asi = EJEMPLO: "cata" -> "Cata"
+        element.dataValues.name.substring(1), //I bring the name so that it stays like this = EXAMPLE: "cata" -> "Cata"
       life: element.dataValues.life,
       attack: element.dataValues.attack,
       defense: element.dataValues.defense,
@@ -57,10 +61,9 @@ const getAllPokemons = async () => {
     };
   });
 
-  //__________________CONCATENATE apiData WITH dataFromDB______________________________
+  //__________________CONCATENATE PokemonDataMap WITH dataFromDB______________________________
 
-  return [...PokemonDataMap,...dataFromDB];
-
+  return [...PokemonDataMap, ...dataFromDB];
 };
 
 module.exports = { getAllPokemons };

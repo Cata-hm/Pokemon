@@ -1,23 +1,25 @@
-const { Pokemon, conn } = require('../../src/db.js');
+const { Type, conn } = require('../../src/db.js');
+const { describe, it } = require('mocha');
 const { expect } = require('chai');
 
-describe('Pokemon model', () => {
+describe('Type model', () => {
   before(() => conn.authenticate()
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
     }));
   describe('Validators', () => {
-    beforeEach(() => Pokemon.sync({ force: true }));
+    beforeEach(() => Type.sync({ force: true }));
     describe('name', () => {
       it('should throw an error if name is null', (done) => {
-        Pokemon.create({})
+        Type.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
       it('should work when its a valid name', () => {
-        return Pokemon.create({ name: 'Pikachu' })
-          .then(pokemon => {
-            expect(pokemon.name).to.equal('Pikachu');
+        Type.create({ name: 'Fire' })
+          .then((type) => {
+            expect(type.name).to.equal('Fire');
+            expect(type.id).to.be.a('string');
           });
       });
     });

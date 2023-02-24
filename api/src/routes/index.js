@@ -1,10 +1,9 @@
-const { Router } = require('express');
+const { Router } = require("express");
 
 // Import all routers
 
-const pokemonsRouter = require('./pokemonsRouter');
-const typesRouter = require('./typesRouter');
-
+const pokemonsRouter = require("./pokemonsRouter");
+const typesRouter = require("./typesRouter");
 
 const router = Router();
 
