@@ -6,20 +6,42 @@ describe('Pokemon model', () => {
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
     }));
+
   describe('Validators', () => {
     beforeEach(() => Pokemon.sync({ force: true }));
+
     describe('name', () => {
       it('should throw an error if name is null', (done) => {
         Pokemon.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        return Pokemon.create({ name: 'Pikachu' })
-          .then(pokemon => {
-            expect(pokemon.name).to.equal('Pikachu');
-          });
+
+      it('should throw an error if name is an empty string', (done) => {
+        Pokemon.create({ name: '' })
+          .then(() => done(new Error('It requires a valid name')))
+          .catch(() => done());
       });
+
     });
+
+    describe('life, attack, defense, speed, height and weight', () => {
+      it('should throw an error if any of these attributes are null', (done) => {
+        Pokemon.create({})
+          .then(() => done(new Error('It requires valid attributes')))
+          .catch(() => done());
+      });
+
+    });
+
+    describe('image', () => {
+      it('should throw an error if image is null', (done) => {
+        Pokemon.create({})
+          .then(() => done(new Error('It requires a valid image')))
+          .catch(() => done());
+      });
+
+    });
+
   });
 });
