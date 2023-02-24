@@ -16,7 +16,9 @@ function App() {
       <Route exact path="/createpokemon" component={Form} />
 
       <Route exact path="/pokemons" component={Home} />
+
       {/* <Route path="/pokemons" render={() => <Home />} /> */}
+      
     </div>
   );
 }

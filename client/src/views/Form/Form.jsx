@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import validate from "../../middleware/validate";
 import styles from "./Form.module.css";
+import { useSelector } from "react-redux";
 
 const Form = () => {
   const [form, setForm] = useState({
@@ -12,7 +13,7 @@ const Form = () => {
     speed: "",
     height: "",
     weight: "",
-    types: [],
+    types: "",
   });
 
   const [errors, setErrors] = useState({
@@ -23,7 +24,7 @@ const Form = () => {
     speed: "",
     height: "",
     weight: "",
-    types: [],
+    types: "",
   });
 
   const changeHandler = (event) => {
@@ -49,6 +50,8 @@ const Form = () => {
       .then((res) => alert(res))
       .catch((err) => alert(err));
   };
+
+  const types = useSelector((state) => state.pokemonTypes);
 
   return (
     <div className={styles.containerCreate}>
@@ -153,7 +156,26 @@ const Form = () => {
             value={form.types}
             onChange={changeHandler}
             name="types"
-          />
+          >
+            
+            <option value="type">Type</option>
+              {types &&
+                types
+                  .sort((a, b) => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                  })
+                  .map((type) => {
+                    return (
+                      <option value={type.name} key={type.id}>
+                        {type.name}
+                      </option>
+                    );
+                  })}
+                      
+
+          </select>
           {errors.types && <span>{errors.types}</span>}
         </div>
         <button className={styles.Submmit} type="submmit">

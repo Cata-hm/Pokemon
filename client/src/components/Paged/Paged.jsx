@@ -38,9 +38,9 @@ export default function Pagination({
         {pageNumber &&
           pageNumber.map((number) => (
             <div className={styles.ul}>
-              <li key={number}>
-                <Link onClick={() => paged(number)}>{number}</Link>
-              </li>
+              <button className={styles.buttonPages} key={number} onClick={() => paged(number)}>
+                {number}
+              </button>
             </div>
           ))}
       </ul>

@@ -24,7 +24,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ADD_POKEMON:
       return {
         ...state,
@@ -45,21 +44,18 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_TYPE:
-      const typeFiltered = state.allPokemons.filter((p) => {
-        return p.types.some((type) => type.name === action.payload);
-      });
-      if (typeFiltered.length) {
-        return {
-          ...state,
-          filter: true,
-          filteredPokemons: typeFiltered,
-        };
-      } else {
-        return {
-          ...state,
-          filteredPokemons: false,
-        };
-      }
+      let fullPokemons2 = state.allPokemons;
+      let resultApi = fullPokemons2.filter(
+        (p) => p.type && p.type.includes(action.payload)
+      );
+      let resultDb = fullPokemons2.filter(
+        (p) => p.Types && p.Types.map((t) => t.name).includes(action.payload)
+      );
+      let result = resultApi.concat(resultDb);
+      return {
+        ...state,
+        filteredPokemons: result,
+      };
 
     case FILTER_BY_CREATOR:
       const filteredCreator = state.allPokemons.filter((p) => {
@@ -109,25 +105,26 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ORDER_ASCENDING:
+      const sortAscending = state.allPokemons.slice().sort((a, b) => {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+        return 0;
+      });
       return {
         ...state,
-        filteredPokemons: state.filteredPokemons.sort((a, b) => {
-          if (a.name < b.name) return -1;
-          if (a.name > b.name) return 1;
-          return 0;
-        }),
+        filteredPokemons: sortAscending,
       };
 
     case ORDER_DESCENDING:
+      const sortDescending = state.filteredPokemons.slice().sort((a, b) => {
+        if (a.name > b.name) return -1;
+        if (a.name < b.name) return 1;
+        return 0;
+      });
       return {
         ...state,
-        filteredPokemons: state.filteredPokemons.sort((a, b) => {
-          if (a.name > b.name) return -1;
-          if (a.name < b.name) return 1;
-          return 0;
-        }),
+        filteredPokemons: sortDescending,
       };
-
     case ORDER_ATTACK_ASCENDING:
       return {
         ...state,
@@ -137,7 +134,7 @@ const rootReducer = (state = initialState, action) => {
           return 0;
         }),
       };
-      
+
     case ORDER_ATTACK_DESCENDING:
       return {
         ...state,

@@ -2,11 +2,17 @@ const axios = require('axios');
 const{ Pokemon, Type } = require('../db')
 
 const getAllPokemons=async()=>{
-   const pokemonApi = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=150');
-   const pokemonApiUrl = pokemonApi.data.results.map((element) => axios.get(element.url));
-     
+  const pokemonApi = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=150');
+
+  const pokemonApiUrl = pokemonApi.data.results.map((element) => axios.get(element.url));
+
+  const pokemonData = await Promise.all(pokemonApiUrl);
+
+  return pokemonData.map((pokemon) => pokemon.data);
+  
    const pokeDB= await Pokemon.findAll({include:Type})
 
+   
    const dataFromDB = pokeDB?.map((element) => {
     return {
        id: element.id,
@@ -44,7 +50,7 @@ const getAllPokemons=async()=>{
          image2: pokemon.sprites.other['official-artwork'].front_default,
          image3: pokemon.sprites.other['home'].front_default,
          Types: pokemon.types.map((type) => {
-             return { name: type.type.name };
+             return { name: type.types.name };
            }),
          create: false
        }

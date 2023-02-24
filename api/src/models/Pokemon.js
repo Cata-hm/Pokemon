@@ -57,5 +57,5 @@ module.exports = (sequelize) => {
       allowNull: false, // No permite que esté vacío (ya que es obligatoria).
       defaultValue: true,
     },
-  });
-};
+  }, {timestamps:false});
+}; 

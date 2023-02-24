@@ -10,18 +10,19 @@ import styles from "./Home.module.css";
 const Home = () => {
   const dispatch = useDispatch();
 
-  const Pokemons = useSelector((state) => state.filteredPokemons);
-  // const Types = useSelector((state) => state.types);
+  const pokemons = useSelector((state) => state.filteredPokemons);
+  const types = useSelector((state) => state.pokemonTypes);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonPerPage /*setPokemonPerPage*/] = useState(12);
   const lastPokemon = currentPage * pokemonPerPage;
   const firstPokemon = lastPokemon - pokemonPerPage;
-  const currentPokemons = Pokemons.slice(firstPokemon, lastPokemon);
+  const currentPokemons = pokemons.slice(firstPokemon, lastPokemon);
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
   useEffect(() => {
     dispatch(getAllPokemons());
     dispatch(getPokemonTypes());
@@ -30,16 +31,18 @@ const Home = () => {
   return (
     <>
       <div>
-
         <div>
-
           <Paged
             pokemonPerPage={pokemonPerPage}
-            Pokemons={Pokemons.length}
+            Pokemons={pokemons.length}
             paged={pagination}
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
           />
+
+          <div>
+            <Filters />
+          </div>
 
           <div className={styles.displayCards}>
             {currentPokemons?.map((element) => {
@@ -59,13 +62,7 @@ const Home = () => {
               );
             })}
           </div>
-
         </div>
-
-        <div>
-          <Filters />
-        </div>
-
       </div>
     </>
   );

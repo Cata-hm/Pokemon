@@ -10,6 +10,6 @@ const pokemonsRouter = Router ();
 
 pokemonsRouter.get("/", getAllPokemonsAndByName);
 pokemonsRouter.get("/:id", getPokemonsById);
-pokemonsRouter.post("/", postValidate, postCreatePokemon);
+pokemonsRouter.post("/", /*postValidate,*/ postCreatePokemon);
 
 module.exports = pokemonsRouter;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Filters.module.css";
+import styles from "./Filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -13,7 +13,7 @@ import {
 const Filters = () => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.pokemonTypes);
-  const [showFilterBar, setShowFilterBar] = useState(false);
+  const [showFilterBar, setShowFilterBar] = useState(true);
   const [selectType, setSelectType] = useState("");
   const [selectCreator, setSelectCreator] = useState("");
   const [selectOrder, setSelectOrder] = useState("");
@@ -22,22 +22,22 @@ const Filters = () => {
     dispatch(getPokemonTypes());
   }, [dispatch]);
 
-  const order = (e) => {
-    setSelectOrder(e.target.value);
-    if (e.target.value === "alph" || e.target.value === "attack") return;
-    dispatch(orderPokemon(e.target.value));
+  const order = (element) => {
+    setSelectOrder(element.target.value);
+    if (element.target.value === "alph" || element.target.value === "attack") return;
+    dispatch(orderPokemon(element.target.value));
   };
 
-  const filterType = (e) => {
-    setSelectType(e.target.value);
-    if (e.target.value === "type") return dispatch(clearState());
-    dispatch(filterByType(e.target.value));
+  const filterType = (element) => {
+    setSelectType(element.target.value);
+    if (element.target.value === "type") return dispatch(clearState());
+    dispatch(filterByType(element.target.value));
   };
 
-  const filterCreator = (e) => {
-    setSelectCreator(e.target.value);
-    if (e.target.value === "all") return dispatch(clearState());
-    dispatch(filterByCreator(e.target.value));
+  const filterCreator = (element) => {
+    setSelectCreator(element.target.value);
+    if (element.target.value === "all") return dispatch(clearState());
+    dispatch(filterByCreator(element.target.value));
   };
 
   const clearAllFilters = () => {
@@ -49,18 +49,17 @@ const Filters = () => {
 
   if (!showFilterBar) {
     return (
-      <div className="menu example8">
+      <div className={styles.container}>
         <span className="span" onClick={() => setShowFilterBar(true)}></span>
       </div>
     );
   } else {
     return (
       <div>
-        <div className="container__menu">
+        <div>
           <h4>Filter by</h4>
-          <div className="textInputWrapper">
+          <div>
             <select
-              className="textInput"
               onChange={filterType}
               value={selectType}
             >
@@ -81,9 +80,8 @@ const Filters = () => {
                   })}
             </select>
           </div>
-          <div className="textInputWrapper">
+          <div>
             <select
-              className="textInput"
               onChange={filterCreator}
               value={selectCreator}
             >
@@ -95,15 +93,15 @@ const Filters = () => {
           </div>
 
           <h4>Order by</h4>
-          <div className="textInputWrapper">
-            <select className="textInput" onChange={order} value={selectOrder}>
+          <div>
+            <select onChange={order} value={selectOrder}>
               <option value="alph">Alphabetical</option>
               <option value="asc">Ascending (A-Z)</option>
               <option value="desc">Descending (Z-A)</option>
             </select>
           </div>
-          <div className="textInputWrapper">
-            <select className="textInput" onChange={order} value={selectOrder}>
+          <div>
+            <select onChange={order} value={selectOrder}>
               <option value="attack">Attack</option>
               <option value="less">Less (-)</option>
               <option value="more">More (+)</option>
@@ -111,22 +109,23 @@ const Filters = () => {
           </div>
 
           <div>
-            <button className="btn btn-primary" onClick={clearAllFilters}>
+            <button onClick={clearAllFilters}>
               Clear filters
             </button>
           </div>
 
           <div>
             <Link to="/createpokemon">
-              <p className="menu-menu">Create</p>
+              <p>Create</p>
             </Link>
           </div>
         </div>
-        <div className="menu2 example8">
-          <span className="span" onClick={() => setShowFilterBar(false)}></span>
+        <div>
+          <span onClick={() => setShowFilterBar(true)}></span>
         </div>
       </div>
     );
   }
 };
+
 export default Filters;
