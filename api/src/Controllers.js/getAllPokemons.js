@@ -12,13 +12,9 @@ const getAllPokemons = async () => {
 
   const pokemonData = await Promise.all(pokemonApiUrl);
 
-  // console.log(pokemonData[0].data.stats[0].base_stat)
   const PokemonDataMap = pokemonData.map((poke) => {
-    // const pokemonApiInfo = await axios.all(pokemonApiUrl);
-
-    //  const apiData = pokemonApiInfo.map((element) => {
     const pokemon = poke.data;
-    
+
     const object = {
       id: pokemon.id.toString(),
       name: pokemon.forms[0].name.toLowerCase(),
@@ -36,38 +32,35 @@ const getAllPokemons = async () => {
       }),
       create: false,
     };
-    console.log(object)
     return object;
   });
 
-  return PokemonDataMap
-  console.log(PokemonDataMap)
   const pokeDB = await Pokemon.findAll({ include: Type });
 
   const dataFromDB = pokeDB?.map((element) => {
     return {
-      id: element.id,
+      id: element.dataValues.id,
       name:
-        element.name.trim().toLowerCase().charAt(0).toUpperCase() +
-        element.name.substring(1), //me traigo el name con el fin de que quede asi = EJEMPLO: "cata" -> "Cata"
-      life: element.life,
-      attack: element.attack,
-      defense: element.defense,
-      speed: element.speed,
-      height: element.height,
-      weight: element.weight,
-      Types: element.Types.map((index) => {
+        element.dataValues.name.trim().toLowerCase().charAt(0).toUpperCase() +
+        element.dataValues.name.substring(1), //me traigo el name con el fin de que quede asi = EJEMPLO: "cata" -> "Cata"
+      life: element.dataValues.life,
+      attack: element.dataValues.attack,
+      defense: element.dataValues.defense,
+      speed: element.dataValues.speed,
+      height: element.dataValues.height,
+      weight: element.dataValues.weight,
+      types: element.dataValues.types.map((index) => {
         return { name: index.name };
       }),
-      image: element.image,
+      image: element.dataValues.image,
       create: true,
     };
   });
 
   //__________________CONCATENATE apiData WITH dataFromDB______________________________
 
-  const allPokemons = PokemonDataMap.concat(dataFromDB);
-  return allPokemons;
+  return [...PokemonDataMap,...dataFromDB];
+
 };
 
 module.exports = { getAllPokemons };
