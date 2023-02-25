@@ -18,7 +18,6 @@ function App() {
       <Route exact path="/pokemons" component={Home} />
 
       {/* <Route path="/pokemons" render={() => <Home />} /> */}
-      
     </div>
   );
 }

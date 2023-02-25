@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styles from "./Paged.module.css";
 
 export default function Pagination({
@@ -38,7 +37,11 @@ export default function Pagination({
         {pageNumber &&
           pageNumber.map((number) => (
             <div className={styles.ul}>
-              <button className={styles.buttonPages} key={number} onClick={() => paged(number)}>
+              <button
+                className={styles.buttonPages}
+                key={number}
+                onClick={() => paged(number)}
+              >
                 {number}
               </button>
             </div>

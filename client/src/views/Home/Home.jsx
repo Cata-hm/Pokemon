@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const pokemons = useSelector((state) => state.filteredPokemons);
-  const types = useSelector((state) => state.pokemonTypes);
+  // const types = useSelector((state) => state.pokemonTypes);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonPerPage /*setPokemonPerPage*/] = useState(12);

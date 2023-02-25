@@ -57,7 +57,9 @@ const Form = () => {
     <div className={styles.containerCreate}>
       <form action="POST" className={styles.form} onSubmit={submitHandler}>
         <div className={styles.separate}>
-          <label className={styles.label} htmlFor="">Name: </label>
+          <label className={styles.label} htmlFor="">
+            Name:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write name"
@@ -70,7 +72,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Life: </label>
+          <label className={styles.label} htmlFor="">
+            Life:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write life"
@@ -83,7 +87,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Attack: </label>
+          <label className={styles.label} htmlFor="">
+            Attack:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write attack"
@@ -96,7 +102,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Defense: </label>
+          <label className={styles.label} htmlFor="">
+            Defense:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write defense"
@@ -109,7 +117,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Speed: </label>
+          <label className={styles.label} htmlFor="">
+            Speed:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write speed"
@@ -122,7 +132,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Heigth: </label>
+          <label className={styles.label} htmlFor="">
+            Heigth:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write height"
@@ -135,7 +147,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Weigth: </label>
+          <label className={styles.label} htmlFor="">
+            Weigth:{" "}
+          </label>
           <input
             className={styles.input}
             placeholder="Write weight"
@@ -148,7 +162,9 @@ const Form = () => {
         </div>
 
         <div>
-          <label className={styles.label} htmlFor="">Types: </label>
+          <label className={styles.label} htmlFor="">
+            Types:{" "}
+          </label>
           <select
             className={styles.input}
             placeholder="Choose a type"
@@ -157,24 +173,21 @@ const Form = () => {
             onChange={changeHandler}
             name="types"
           >
-            
             <option value="type">Type</option>
-              {types &&
-                types
-                  .sort((a, b) => {
-                    if (a.name < b.name) return -1;
-                    if (a.name > b.name) return 1;
-                    return 0;
-                  })
-                  .map((type) => {
-                    return (
-                      <option value={type.name} key={type.id}>
-                        {type.name}
-                      </option>
-                    );
-                  })}
-                      
-
+            {types &&
+              types
+                .sort((a, b) => {
+                  if (a.name < b.name) return -1;
+                  if (a.name > b.name) return 1;
+                  return 0;
+                })
+                .map((type) => {
+                  return (
+                    <option value={type.name} key={type.id}>
+                      {type.name}
+                    </option>
+                  );
+                })}
           </select>
           {errors.types && <span>{errors.types}</span>}
         </div>

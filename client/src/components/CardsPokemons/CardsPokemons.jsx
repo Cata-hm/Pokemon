@@ -5,9 +5,9 @@ const CardsPokemons = ({ id, name, life, image }) => {
   // const pokemons = useSelector((state) => state.allPokemons);
 
   return (
-      <div>
-        <Card id={id} name={name} life={life} image={image} key={id} />
-      </div>
+    <div>
+      <Card id={id} name={name} life={life} image={image} key={id} />
+    </div>
   );
 };
 

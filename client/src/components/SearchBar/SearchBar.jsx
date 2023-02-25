@@ -17,8 +17,8 @@ function SearchBar() {
     setSearch("");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (element) => {
+    element.preventDefault();
     if (search) {
       dispatch(getPokemonByName(search));
       setSearch("");

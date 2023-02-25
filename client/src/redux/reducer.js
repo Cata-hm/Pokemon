@@ -59,7 +59,7 @@ const rootReducer = (state = initialState, action) => {
 
     case FILTER_BY_CREATOR:
       const filteredCreator = state.allPokemons.filter((p) => {
-        return p.created.toString() === action.payload;
+        return p.created?.toString() === action.payload;
       });
       if (filteredCreator.length) {
         return {
@@ -69,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          filteredPokemons: false,
+          filteredPokemons: [],
         };
       }
 
@@ -125,10 +125,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredPokemons: sortDescending,
       };
+
     case ORDER_ATTACK_ASCENDING:
       return {
         ...state,
-        filteredPokemons: state.filteredPokemons.sort((a, b) => {
+        filteredPokemons: state.filteredPokemons.slice().sort((a, b) => {
           if (a.attack > b.attack) return -1;
           if (a.attack < b.attack) return 1;
           return 0;
@@ -138,7 +139,7 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_ATTACK_DESCENDING:
       return {
         ...state,
-        filteredPokemons: state.filteredPokemons.sort((a, b) => {
+        filteredPokemons: state.filteredPokemons.slice().sort((a, b) => {
           if (a.attack < b.attack) return -1;
           if (a.attack > b.attack) return 1;
           return 0;

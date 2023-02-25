@@ -24,7 +24,8 @@ const Filters = () => {
 
   const order = (element) => {
     setSelectOrder(element.target.value);
-    if (element.target.value === "alph" || element.target.value === "attack") return;
+    if (element.target.value === "alph" || element.target.value === "attack")
+      return;
     dispatch(orderPokemon(element.target.value));
   };
 
@@ -49,17 +50,18 @@ const Filters = () => {
 
   if (!showFilterBar) {
     return (
-      <div className={styles.container}>
+      <div>
         <span className="span" onClick={() => setShowFilterBar(true)}></span>
       </div>
     );
   } else {
     return (
-      <div>
-        <div>
-          <h4>Filter by</h4>
-          <div>
+      <div className={styles.firstContainer}>
+        <div className={styles.filterscontainer}>
+          <h4 className={styles.label}>Filter by</h4>
+          <div className={styles.divs}>
             <select
+              className={styles.input}
               onChange={filterType}
               value={selectType}
             >
@@ -80,10 +82,11 @@ const Filters = () => {
                   })}
             </select>
           </div>
-          <div>
+          <div className={styles.divs}>
             <select
               onChange={filterCreator}
               value={selectCreator}
+              className={styles.input2}
             >
               <option>Source</option>
               <option value="all">All</option>
@@ -92,32 +95,37 @@ const Filters = () => {
             </select>
           </div>
 
-          <h4>Order by</h4>
-          <div>
-            <select onChange={order} value={selectOrder}>
+          <h4 className={styles.label}>Order by</h4>
+          <div className={styles.divs}>
+            <select
+              onChange={order}
+              value={selectOrder}
+              className={styles.input}
+            >
               <option value="alph">Alphabetical</option>
               <option value="asc">Ascending (A-Z)</option>
               <option value="desc">Descending (Z-A)</option>
             </select>
           </div>
-          <div>
-            <select onChange={order} value={selectOrder}>
+          <div className={styles.divs}>
+            <select
+              onChange={order}
+              value={selectOrder}
+              className={styles.input2}
+            >
               <option value="attack">Attack</option>
               <option value="less">Less (-)</option>
               <option value="more">More (+)</option>
             </select>
           </div>
 
-          <div>
-            <button onClick={clearAllFilters}>
+          <div className={styles.divs}>
+            <button
+              onClick={clearAllFilters}
+              className={styles.btnPrimaryClearFilters}
+            >
               Clear filters
             </button>
-          </div>
-
-          <div>
-            <Link to="/createpokemon">
-              <p>Create</p>
-            </Link>
           </div>
         </div>
         <div>
