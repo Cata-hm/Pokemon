@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   getPokemonTypes,
   orderPokemon,
@@ -39,6 +38,8 @@ const Filters = () => {
     setSelectCreator(element.target.value);
     if (element.target.value === "all") return dispatch(clearState());
     dispatch(filterByCreator(element.target.value));
+    if (element.target.value === "false") dispatch(filterByCreator(element.target.value));
+    if (element.target.value === "true") dispatch(filterByCreator(element.target.value));
   };
 
   const clearAllFilters = () => {
@@ -88,10 +89,10 @@ const Filters = () => {
               value={selectCreator}
               className={styles.input2}
             >
-              <option>Source</option>
+              <option value="">Source</option>
               <option value="all">All</option>
-              <option value="false">Api</option>
-              <option value="true">Db</option>
+              <option value="false">Existing</option>
+              <option value="true">Created</option>
             </select>
           </div>
 

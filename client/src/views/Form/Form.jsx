@@ -35,19 +35,11 @@ const Form = () => {
     setForm({ ...form, [property]: value });
   };
 
-  // const selectHandler = (event) => {
-  //   const property = event.target.value;
-  //   const value = event.target.value;
-
-  //   setErrors(validate({ ...form, [property]: value }));
-  //   setForm({ ...form, [property]: value });
-  // };
-
   const submitHandler = (event) => {
     event.preventDefault();
     axios
       .post("http://localhost:3001/pokemons", form)
-      .then((res) => alert(res))
+      .then((res) => alert("Pokemon creado!"))
       .catch((err) => alert(err));
   };
 

@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonById, getPokemonTypes } from "../../redux/actions";
 import { useParams, Link } from "react-router-dom";
-// import pokeballEye from "../../assets/img/pokeballEye.gif";
+import Loading from "../../components/Loading/Loading";
+import gif from "../../assets/img/giphy.gif";
 import styles from "./Detail.module.css";
 
 const PokemonDetails = () => {
@@ -18,7 +19,7 @@ const PokemonDetails = () => {
   return (
     <div className={styles.content}>
       {!Object.keys(detail).length ? ( //This happens if detail is empty
-        <img src={"pokeballEye"} alt="" className="pokeball-gif" />
+        <Loading src={gif} alt="" className="pokeball-gif" />
       ) : (
         <>
           <div className={styles.details}>

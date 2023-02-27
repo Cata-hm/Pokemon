@@ -36,7 +36,7 @@ export default function Pagination({
       <ul className={styles.li}>
         {pageNumber &&
           pageNumber.map((number) => (
-            <div className={styles.ul}>
+            <div className={styles.ul} key={number}>
               <button
                 className={styles.buttonPages}
                 key={number}

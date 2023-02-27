@@ -108,6 +108,7 @@ export function filterByType(type) {
 }
 
 export function filterByCreator(payload) {
+  console.log(payload)
   return {
     type: FILTER_BY_CREATOR,
     payload: payload,

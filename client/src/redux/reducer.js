@@ -59,8 +59,9 @@ const rootReducer = (state = initialState, action) => {
 
     case FILTER_BY_CREATOR:
       const filteredCreator = state.allPokemons.filter((p) => {
-        return p.created?.toString() === action.payload;
+        return p.create?.toString() === action.payload;
       });
+      console.log(filteredCreator)
       if (filteredCreator.length) {
         return {
           ...state,

@@ -4,6 +4,7 @@ import Filters from "../../components/Filters/Filters";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPokemons, getPokemonTypes } from "../../redux/actions";
+import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 
@@ -31,38 +32,42 @@ const Home = () => {
   return (
     <>
       <div>
-        <div>
-          <Paged
-            pokemonPerPage={pokemonPerPage}
-            Pokemons={pokemons.length}
-            paged={pagination}
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-          />
-
+        {!pokemons.length ? (
+          <Loading />
+        ) : (
           <div>
-            <Filters />
-          </div>
+            <Paged
+              pokemonPerPage={pokemonPerPage}
+              Pokemons={pokemons.length}
+              paged={pagination}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
 
-          <div className={styles.displayCards}>
-            {currentPokemons?.map((element) => {
-              return (
-                <div>
-                  <Link to={`pokemons/${element.id}`} key={element.id}>
-                    <CardsPokemons
-                      className={styles.displayCards}
-                      id={element.id}
-                      name={element.name}
-                      life={element.life}
-                      image={element.image}
-                      key={element.id}
-                    />
-                  </Link>
-                </div>
-              );
-            })}
+            <div>
+              <Filters />
+            </div>
+
+            <div className={styles.displayCards}>
+              {currentPokemons?.map((element) => {
+                return (
+                  <div key={element.id}>
+                    <Link to={`pokemons/${element.id}`} key={element.id}>
+                      <CardsPokemons
+                        className={styles.displayCards}
+                        id={element.id}
+                        name={element.name}
+                        life={element.life}
+                        image={element.image}
+                        key={element.id}
+                      />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
