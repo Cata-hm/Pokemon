@@ -66,6 +66,9 @@ const Home = () => {
                 );
               })}
             </div>
+            <div className={styles.divBy}>
+              <h5 >By: Catalina Hernández Mejía</h5>
+            </div>
           </div>
         )}
       </div>

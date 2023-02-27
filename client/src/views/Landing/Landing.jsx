@@ -11,13 +11,17 @@ function Landing() {
       </div>
 
       <div className={styles.content}>
-        <div>
-          <h1 className={styles.h1}>Welcome to Pokémon world!</h1>
-        </div>
         <div className={styles.contentButton}>
           <Link to="/pokemons">
             <button className={styles.btnPrimary}>Get in</button>
           </Link>
+        </div>
+        <div>
+          <h1 className={styles.h1}>Welcome to Pokémon world!</h1>
+        </div>
+
+        <div>
+          <h5 className={styles.h5}>By: Catalina Hernández Mejía</h5>
         </div>
       </div>
     </div>
