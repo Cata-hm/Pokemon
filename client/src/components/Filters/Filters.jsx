@@ -38,8 +38,10 @@ const Filters = () => {
     setSelectCreator(element.target.value);
     if (element.target.value === "all") return dispatch(clearState());
     dispatch(filterByCreator(element.target.value));
-    if (element.target.value === "false") dispatch(filterByCreator(element.target.value));
-    if (element.target.value === "true") dispatch(filterByCreator(element.target.value));
+    if (element.target.value === "false")
+      dispatch(filterByCreator(element.target.value));
+    if (element.target.value === "true")
+      dispatch(filterByCreator(element.target.value));
   };
 
   const clearAllFilters = () => {
@@ -68,19 +70,13 @@ const Filters = () => {
             >
               <option value="type">Type</option>
               {types &&
-                types
-                  .sort((a, b) => {
-                    if (a.name < b.name) return -1;
-                    if (a.name > b.name) return 1;
-                    return 0;
-                  })
-                  .map((type) => {
-                    return (
-                      <option value={type.name} key={type.id}>
-                        {type.name}
-                      </option>
-                    );
-                  })}
+                types.map((type) => {
+                  return (
+                    <option value={type.name} key={type.id}>
+                      {type.name}
+                    </option>
+                  );
+                })}
             </select>
           </div>
           <div className={styles.divs}>

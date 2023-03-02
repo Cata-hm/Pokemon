@@ -100,7 +100,6 @@ export function addPokemon(pokemon) {
 // Filter
 
 export function filterByType(type) {
-  console.log(type);
   return {
     type: FILTER_BY_TYPE,
     payload: type,
@@ -108,7 +107,6 @@ export function filterByType(type) {
 }
 
 export function filterByCreator(payload) {
-  console.log(payload)
   return {
     type: FILTER_BY_CREATOR,
     payload: payload,
@@ -118,7 +116,6 @@ export function filterByCreator(payload) {
 // Order
 
 export function orderPokemon(type) {
-  console.log(type);
   if (type === "asc") {
     return {
       type: ORDER_ASCENDING,
