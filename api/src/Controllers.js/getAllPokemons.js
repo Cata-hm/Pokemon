@@ -53,7 +53,7 @@ const getAllPokemons = async () => {
       speed: element.dataValues.speed,
       height: element.dataValues.height,
       weight: element.dataValues.weight,
-      types: element.dataValues.types.map((index) => {
+      Types: element.dataValues.types.map((index) => {
         return { name: index.name };
       }),
       image: element.dataValues.image,
