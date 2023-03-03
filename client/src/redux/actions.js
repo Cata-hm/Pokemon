@@ -14,7 +14,7 @@ export const ORDER_DESCENDING = "ORDER_DESCENDING";
 export const ORDER_ATTACK_DESCENDING = "ORDER_ATTACK_DESCENDING";
 export const ORDER_ATTACK_ASCENDING = "ORDER_ATTACK_ASCENDING";
 
-const URL = "http://localhost:3001";
+const URL = "https://pokemon-api-c72r.onrender.com";
 
 // Get
 
