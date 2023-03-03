@@ -35,7 +35,7 @@ const PokemonDetails = () => {
               <h3>Speed: {detail.speed}</h3>
               <h3>
                 Types:{" "}
-                {detail.Types.map((element, index) => (
+                {detail.Types?.map((element, index) => (
                   <span key={index}>{element.name} </span>
                 ))}{" "}
               </h3>
