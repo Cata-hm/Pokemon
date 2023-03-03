@@ -38,7 +38,7 @@ const Form = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3001/pokemons", form)
+      .post("https://pokemon-api-c72r.onrender.com/pokemons", form)
       .then((res) => alert("Pokemon creado!"))
       .catch((err) => alert(err));
   };
