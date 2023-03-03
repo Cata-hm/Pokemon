@@ -61,10 +61,10 @@ export function getPokemonById(id) {
   return async function (dispatch) {
     try {
       const response = await axios.get(`${URL}/pokemons/${id}`);
-      dispatch({ type: GET_POKEMON_BY_ID, payload: response.data });
+      dispatch({ Type: GET_POKEMON_BY_ID, payload: response.data });
     } catch (error) {
       console.log(error);
-      dispatch({ type: GET_POKEMON_BY_ID, payload: null });
+      dispatch({ Type: GET_POKEMON_BY_ID, payload: null });
     }
   };
 }

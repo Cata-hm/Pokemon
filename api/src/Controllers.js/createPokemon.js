@@ -1,7 +1,7 @@
 const { Pokemon, Type } = require("../db");
 
 const createPokemon = async (body) => {
-  const { name, life, attack, defense, speed, height, weight, types } = body;
+  const { name, life, attack, defense, speed, height, weight, Types } = body;
   const newPokemon = await Pokemon.create({
     name: name,
     life: life,
@@ -12,7 +12,7 @@ const createPokemon = async (body) => {
     weight: weight,
   });
 
-  const allTypes = await Type.findOne({ where: { name: types } });
+  const allTypes = await Type.findOne({ where: { name: Types } });
   await newPokemon.addType(allTypes);
 
   return newPokemon;
